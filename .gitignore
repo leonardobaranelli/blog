@@ -1,0 +1,17 @@
+# Composer files
+/vendor/
+
+# Environment file
+.env
+
+# Log files
+*.log
+
+# Session files
+/session/
+
+# User uploads
+/uploads/
+
+# Cache files
+/cache/
