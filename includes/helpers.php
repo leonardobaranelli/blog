@@ -57,6 +57,36 @@
         return $result;
     }
 
+    function get_posts($limit = null, $category = null, $search = null){
+        global $db;
+
+        $sql="SELECT p.*, c.name AS 'category' FROM posts p ".
+             "INNER JOIN categories c ON p.category_id = c.id ";
+        
+        if(!empty($category)){
+            $sql .= "WHERE p.category_id = $category ";
+        }
+        
+        if(!empty($search)){
+            $sql .= "WHERE p.title LIKE '%$search%' ";
+        }
+        
+        $sql .= "ORDER BY p.id DESC ";
+        
+        if($limit){            
+            $sql .= "LIMIT 4";
+        }
+        
+        $posts = mysqli_query($db, $sql);
+        
+        $result = array();
+        if($posts && mysqli_num_rows($posts) >= 1){
+            $result = $posts;
+        }
+        
+        return $result;
+    }
+
     function get_latest_posts(){
         global $db;
         
